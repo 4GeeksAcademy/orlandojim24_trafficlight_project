@@ -1,59 +1,59 @@
 import React, { useState } from "react";
 
-//include images into your bundle
-
-
-//create your first component
 const Home = () => {
+	// single state to track active light
+	const [activeLight, setActiveLight] = useState(null); // can be "red", "yellow", "green"
 
-	const [Red, setRed] = useState("btn-danger opacity-25");
-	const [Yellow, setYellow] = useState("btn-warning opacity-25");
-	const [Green, setGreen] = useState("btn-success opacity-25");
-	
-
-	const redLight = () => {
-		if (Red === "btn-danger opacity-25") {
-			setRed("btn-danger");
+	// function to toggle a light
+	const toggleLight = (color) => {
+		if (activeLight === color) {
+			setActiveLight(null); // turn off if already active
 		} else {
-			setRed("btn-danger opacity-25");
+			setActiveLight(color); // activate selected light
 		}
 	};
 
-	const yellowLight = () => {
-		if (Yellow === "btn-warning opacity-25") {
-			setYellow("btn-warning");
-		} else {
-			setYellow("btn-warning opacity-25");
-		}
-	};
-
-	const greenLight = () => {
-		if (Green === "btn-success opacity-25") {
-			setGreen("btn-success");
-		} else {
-			setGreen("btn-success opacity-25");
-		}
-	};
-
-	
-	
 	return (
 		<div className="d-flex justify-content-evenly">
 			<div className="d-flex flex-column align-items-center justify-content-center mt-5">
-				<div className="bg-dark" style= {{ width: "40px", height: "120px" }}></div>
-				<div className="bg-dark" style={{ width: "150px", height: "auto", paddingBottom: "50px", borderRadius: '30px' }}>
-					<div className="d-flex flex-column" aria-label="Basic mixed styles example">
-						<button type="button" className={`btn ${Red} mt-5 mx-4 rounded-circle`} style={{ height: "90px" }} onClick={redLight}>
-						</button>
-						<button type="button" className={`btn ${Yellow} mt-5 mx-4 rounded-circle`} style={{ height: "90px" }} onClick={yellowLight}>
-						</button>
-						<button type="button" className={`btn ${Green} mt-5 mx-4 rounded-circle`} style={{ height: "90px" }} onClick={greenLight}>
-						</button>
-                    
+				<div className="bg-dark" style={{ width: "40px", height: "120px" }}></div>
+				<div
+					className="bg-dark"
+					style={{
+						width: "150px",
+						height: "auto",
+						paddingBottom: "50px",
+						borderRadius: "30px",
+					}}
+				>
+					<div className="d-flex flex-column" aria-label="Traffic Light">
+						<button
+							type="button"
+							className={`btn btn-danger mt-5 mx-4 rounded-circle ${
+								activeLight === "red" ? "" : "opacity-25"
+							}`}
+							style={{ height: "90px" }}
+							onClick={() => toggleLight("red")}
+						></button>
+						<button
+							type="button"
+							className={`btn btn-warning mt-5 mx-4 rounded-circle ${
+								activeLight === "yellow" ? "" : "opacity-25"
+							}`}
+							style={{ height: "90px" }}
+							onClick={() => toggleLight("yellow")}
+						></button>
+						<button
+							type="button"
+							className={`btn btn-success mt-5 mx-4 rounded-circle ${
+								activeLight === "green" ? "" : "opacity-25"
+							}`}
+							style={{ height: "90px" }}
+							onClick={() => toggleLight("green")}
+						></button>
 					</div>
 				</div>
 			</div>
-			
 		</div>
 	);
 };
